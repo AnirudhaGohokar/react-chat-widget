@@ -16,23 +16,40 @@ class Widget extends Component {
   toggleConversation = () => {
     this.props.dispatch(toggleChat());
   }
-
-  handleMessageSubmit = (event) => {
-    event.preventDefault();
-    const userInput = event.target.message.value;
-    if (userInput.trim()) {
-      this.props.dispatch(addUserMessage(userInput));
-      this.props.handleNewUserMessage(userInput);
-    }
-    event.target.message.value = '';
-  }
-
   handleQuickButtonClicked = (event, value) => {
     event.preventDefault();
 
     if(this.props.handleQuickButtonClicked) {
       this.props.handleQuickButtonClicked(value);
     }
+  }
+
+
+  // handleMessageSubmit = (event) => {
+  //   event.preventDefault();
+  //   const userInput = event.target.message.value;
+  //   if (userInput) {
+  //     this.props.dispatch(addUserMessage(userInput));
+  //     this.props.handleNewUserMessage(userInput);
+  //   }
+  //   event.target.message.value = '';
+  // }
+
+  handleMessageSubmit = (message) => {
+    const { dispatch, handleNewUserMessage } = this.props
+    // console.log('MESSAGE TO SEND IS: ', message)
+    dispatch(addUserMessage(message))
+    handleNewUserMessage(message)
+
+  }
+
+  startRecording = () => {
+    console.log('rec start');
+    this.props.startRecording();
+  }
+  stopRecording = () => {
+    console.log('rec stop');
+    this.props.stopRecording();
   }
 
   render() {
@@ -51,6 +68,9 @@ class Widget extends Component {
         badge={this.props.badge}
         autofocus={this.props.autofocus}
         customLauncher={this.props.customLauncher}
+        startRecording={this.startRecording}
+        stopRecording={this.stopRecording}
+        isMicAvailable={this.props.isMicAvailable}
       />
     );
   }
@@ -68,7 +88,9 @@ Widget.propTypes = {
   fullScreenMode: PropTypes.bool,
   badge: PropTypes.number,
   autofocus: PropTypes.bool,
-  customLauncher: PropTypes.func
+  customLauncher: PropTypes.func,
+  customToggleCallback: PropTypes.func,
+  isMicAvailable:PropTypes.bool
 };
 
 export default connect()(Widget);

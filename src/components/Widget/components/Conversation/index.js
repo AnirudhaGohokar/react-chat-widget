@@ -25,6 +25,9 @@ const Conversation = props =>
       placeholder={props.senderPlaceHolder}
       disabledInput={props.disabledInput}
       autofocus={props.autofocus}
+      startRecording={props.startRecording}
+      stopRecording={props.stopRecording}
+      isMicAvailable={props.isMicAvailable}
     />
   </div>;
 
@@ -38,7 +41,10 @@ Conversation.propTypes = {
   toggleChat: PropTypes.func,
   showCloseButton: PropTypes.bool,
   disabledInput: PropTypes.bool,
-  autofocus: PropTypes.bool
+  autofocus: PropTypes.bool,
+  startRecording:PropTypes.func,
+  stopRecording:PropTypes.func,
+  isMicAvailable:PropTypes.bool
 };
 
 export default Conversation;

@@ -1,18 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-
 import Conversation from './components/Conversation';
 import Launcher from './components/Launcher';
 import './style.scss';
-
 const WidgetLayout = props => (
   <div
-    className={
-      `rcw-widget-container ${props.fullScreenMode ? 'rcw-full-screen' : ''} ${props.showChat ? 'rcw-opened' : ''}`
-    }
+    className={`rcw-widget-container ${
+      props.fullScreenMode ? 'rcw-full-screen' : ''
+      } ${props.showChat ? 'rcw-opened' : ''}`}
+    style={{ zIndex: '110' }}
   >
-    {props.showChat &&
+    {props.showChat && (
       <Conversation
         title={props.title}
         subtitle={props.subtitle}
@@ -26,16 +25,16 @@ const WidgetLayout = props => (
         disabledInput={props.disabledInput}
         autofocus={props.autofocus}
         titleAvatar={props.titleAvatar}
+        startRecording={props.startRecording}
+        stopRecording={props.stopRecording}
+        isMicAvailable={props.isMicAvailable}
       />
-    }
-    {props.customLauncher ?
-      props.customLauncher(props.onToggleConversation) :
-      !props.fullScreenMode &&
-      <Launcher
-        toggle={props.onToggleConversation}
-        badge={props.badge}
-      />
-    }
+    )}
+    {props.customLauncher
+      ? props.customLauncher(props.onToggleConversation)
+      : !props.fullScreenMode && (
+        <Launcher toggle={props.onToggleConversation} badge={props.badge} />
+      )}
   </div>
 );
 
@@ -54,7 +53,8 @@ WidgetLayout.propTypes = {
   fullScreenMode: PropTypes.bool,
   badge: PropTypes.number,
   autofocus: PropTypes.bool,
-  customLauncher: PropTypes.func
+  customLauncher: PropTypes.func,
+  isMicAvailable:PropTypes.bool
 };
 
 export default connect(store => ({

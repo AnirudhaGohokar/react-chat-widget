@@ -20,6 +20,9 @@ const ConnectedWidget = props =>
       badge={props.badge}
       autofocus={props.autofocus}
       customLauncher={props.launcher}
+      startRecording={props.startRecording}
+      stopRecording={props.stopRecording}
+      isMicAvailable={props.isMicAvailable}
     />
   </Provider>;
 
@@ -35,7 +38,10 @@ ConnectedWidget.propTypes = {
   fullScreenMode: PropTypes.bool,
   badge: PropTypes.number,
   autofocus: PropTypes.bool,
-  launcher: PropTypes.func
+  launcher: PropTypes.func,
+  stopRecording: PropTypes.func,
+  startRecording: PropTypes.func,
+  isMicAvailable:PropTypes.bool
 };
 
 ConnectedWidget.defaultProps = {
@@ -45,7 +51,8 @@ ConnectedWidget.defaultProps = {
   showCloseButton: true,
   fullScreenMode: false,
   badge: 0,
-  autofocus: true
+  autofocus: true,
+  isMicAvailable:false
 };
 
 export default ConnectedWidget;

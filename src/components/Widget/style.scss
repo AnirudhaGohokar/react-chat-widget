@@ -1,6 +1,10 @@
 @import 'animation.scss';
 @import 'common.scss';
 
+*, ::after, ::before {
+  box-sizing: border-box;
+}
+
 .rcw-widget-container {
   bottom: 0;
   display: flex;
